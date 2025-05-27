@@ -1,44 +1,81 @@
 const  prisma  = require('../../prisma/prismaClient');
 const {formatDate2} = require('../../utils/dateFormat');
+const axios = require('axios');
 
-const getStakeInfo = async (req, res) => {
+const postStakeInfo = async (req, res) => {
   try {
-    const stakes = await prisma.stake_data.findMany();
 
-    if (!stakes.length) {
-      return res.status(404).json({ message: 'No stake data found' });
-    }
+    // const stakes = await prisma.stake_data.findMany({});
 
-    const details = stakes.map(stake => ({
-      stakeInfo: {
-        betId: stake.betId,
-        customerId: stake.customerId,
-        mobileNo: stake.mobileNo,
-        punterAmt: stake.punterAmt.toFixed(2),
-        stakeAmt: stake.stakeAmt.toFixed(2),
-        desc: stake.desc,
-        odds: stake.odds,
-        stakeType: stake.stakeType,
-        dateOfStake: formatDate2(stake.dateOfStake),
-        exciseAmt: stake.exciseAmt.toFixed(2),
-        expectedOutcomeTime: stake.expectedOutcomeTime,
-        walletBalanceStake: stake.walletBalanceStake.toFixed(2),
-      },
-    }));
+    // if (!stakes.length) {
+    //   return res.status(404).json({ message: 'No stake data found' });
+    // }
 
-    const response = {
-      Request: {
-        hash: "e5c79f7bad362505dcdf89363e763ca7133fc64be687d2cd07cf848ee5769070", // You can generate hash from data if needed
-        header: {
-          operatorPin: "P051692747N", // Replace with actual logic if dynamic
-          transactionDate: new Date().toISOString(),
-          noOfStakes: details.length,
-        },
-       details
-      },
-    };
+    const stakes = req.body;
 
-    res.json(response);
+  
+
+    // const details = stakes.map(stake => ({
+    //   stakeInfo: {
+    //     betId: stake.betId,
+    //     customerId: stake.customerId,
+    //     mobileNo: stake.mobileNo,
+    //     punterAmt: stake.punterAmt.toFixed(2),
+    //     stakeAmt: stake.stakeAmt.toFixed(2),
+    //     desc: stake.desc,
+    //     odds: stake.odds,
+    //     stakeType: stake.stakeType,
+    //     dateOfStake: formatDate2(stake.dateOfStake),
+    //     exciseAmt: stake.exciseAmt.toFixed(2),
+    //     expectedOutcomeTime: stake.expectedOutcomeTime,
+    //     walletBalanceStake: stake.walletBalanceStake.toFixed(2),
+    //   },
+    // }));
+
+    // const response = {
+    //   Request: {
+    //     hash: "e5c79f7bad362505dcdf89363e763ca7133fc64be687d2cd07cf848ee5769070", // You can generate hash from data if needed
+    //     header: {
+    //       operatorPin: "P051692747N", // Replace with actual logic if dynamic
+    //       transactionDate: new Date().toISOString(),
+    //       noOfStakes: details.length,
+    //     },
+    //    details
+    //   },
+    // };
+
+    axios({
+         method: 'post',
+         url: 'https://api-test.kra.go.ke/api/receiveStakeData',
+         data: {
+           stakes
+         }
+       })
+       .then(function (response) {
+         res.status(201).json({
+            message: response.message,
+            data: response.data,
+            status: response.status
+       });
+       })
+       .catch(function (error) {
+         if (error.response) {
+           // The request was made and the server responded with a status code
+           res.status(error.response.status).json({
+             message: 'Error registering user',
+             error: error.response.data
+           });
+         } else if (error.request) {
+           // The request was made but no response was received
+           res.status(500).json({ message: 'No response from server', error: error.message });
+         } else {
+           // Something happened in setting up the request that triggered an Error
+           res.status(500).json({ message: 'Error in request setup', error: error.message });
+         }
+       })
+       .finally(function () {
+         // always executed
+       });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Something went wrong', error: err.message });
@@ -46,4 +83,4 @@ const getStakeInfo = async (req, res) => {
 };
 
 
-module.exports = { getStakeInfo };
+module.exports = { postStakeInfo };

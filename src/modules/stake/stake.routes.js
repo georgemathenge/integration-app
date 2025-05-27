@@ -4,6 +4,6 @@ const stakeController = require('./stake.controller');  // Import the entire con
 
 
 
-router.get('/', stakeController.getStakeInfo);
+router.post('/postStakeData', stakeController.postStakeInfo);
 
 module.exports = router;
