@@ -4,6 +4,7 @@ const cors = require('cors');
 const stakeRoutes = require('./modules/stake/stake.routes');
 const outcomeDataRoutes = require('./modules/outcomeData/outcomeData.routes');
 const userRoutes = require('./modules/users/users.routes');
+const authMiddleware = require('./middleware/authentication.js'); 
 
 
 
@@ -22,7 +23,7 @@ app.options('*', cors());
 
 
 app.use('/api/v1/outcomeData', outcomeDataRoutes);
-app.use('/api/v1/stakes', stakeRoutes);
+app.use('/api/v1/stakes',authMiddleware , stakeRoutes);
 app.use('/api/v1/users', userRoutes);
 
 module.exports = app;
