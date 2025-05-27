@@ -47,9 +47,7 @@ const postStakeInfo = async (req, res) => {
     axios({
          method: 'post',
          url: 'https://api-test.kra.go.ke/api/receiveStakeData',
-         data: {
-           stakes
-         }, 
+      stakes,
           headers: {
             'Authorization': `Bearer ${res.authToken}`,
             'Content-Type': 'application/json',
@@ -67,7 +65,7 @@ const postStakeInfo = async (req, res) => {
          if (error.response) {
            // The request was made and the server responded with a status code
            res.status(error.response.status).json({
-             message: 'Error registering user',
+             message: 'Error posting stake Data',
              error: error.response.data
            });
          } else if (error.request) {

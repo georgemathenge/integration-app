@@ -22,7 +22,7 @@ app.use(cors({
 app.options('*', cors());
 
 
-app.use('/api/v1/outcomeData', outcomeDataRoutes);
+app.use('/api/v1/outcomeData',authMiddleware, outcomeDataRoutes);
 app.use('/api/v1/stakes',authMiddleware , stakeRoutes);
 app.use('/api/v1/users', userRoutes);
 
