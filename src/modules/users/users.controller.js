@@ -58,13 +58,13 @@ const registerUser = async (req, res) => {
 const authenticate = async (req, res) => {
   try {
    
-    const { login, password } = req.body;
+    const { username, password } = req.body;
 
     axios({
       method: 'post',
       url: 'https://api-test.kra.go.ke/api/authenticate',
       data: {
-        username:login,
+        username:username,
         password:password,
       }
     })
