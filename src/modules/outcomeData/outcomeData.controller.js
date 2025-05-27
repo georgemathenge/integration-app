@@ -41,10 +41,10 @@ const getAllOutcomeData = async (req, res) => {
              url: 'https://api-test.kra.go.ke/api/receiveOutcomeData',
                        data:outcomeData, 
               
-              headers: {
-                'Authorization': `Bearer ${res.authToken}`,
-                'Content-Type': 'application/json',
-              }
+              // headers: {
+              //   'Authorization': `Bearer ${res.authToken}`,
+              //   'Content-Type': 'application/json',
+              // }
     
            })
            .then(function (response) {
