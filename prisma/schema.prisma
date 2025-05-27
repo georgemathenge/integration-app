@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model outcome_data {
+  id                   Int      @id @default(autoincrement())
+  betId                String   @db.Char(15)
+  outcome              String   @db.Char(10)
+  outcomedate          DateTime @default(now()) @db.Timestamp(0)
+  payout               Float    @db.Float
+  winnings             Float    @db.Float
+  withholdingTax       Float    @db.Float
+  walletBalanceOutcome Float    @db.Float
+
+  @@index([betId], map: "betId")
+}
+
+model stake_data {
+  id                  Int    @id @default(autoincrement())
+  betId               String @db.VarChar(15)
+  customerId          String @db.VarChar(15)
+  mobileNo            String @db.VarChar(15)
+  punterAmt           Float  @db.Float
+  stakeAmt            Float  @db.Float
+  desc                String @db.VarChar(15)
+  odds                String @db.VarChar(15)
+  stakeType           String @db.VarChar(15)
+  dateOfStake         String @db.VarChar(50)
+  exciseAmt           Float  @db.Float
+  expectedOutcomeTime String @db.VarChar(50)
+  walletBalanceStake  Float  @db.Float
+
+  @@index([betId], map: "betId")
+}
