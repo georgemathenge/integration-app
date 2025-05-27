@@ -39,7 +39,7 @@ const getAllOutcomeData = async (req, res) => {
       axios({
              method: 'post',
              url: 'https://api-test.kra.go.ke/api/receiveOutcomeData',
-                           outcomeData, 
+                       data:outcomeData, 
               
               headers: {
                 'Authorization': `Bearer ${res.authToken}`,
