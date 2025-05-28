@@ -26,7 +26,7 @@ app.options('*', cors());
 app.use('/api/v1/outcomeData', outcomeDataRoutes);
 app.use('/api/v1/stakes', stakeRoutes);
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/prn', prnRoutes);
+app.use('/api/v1/prn',authMiddleware, prnRoutes);
 
 module.exports = app;
 

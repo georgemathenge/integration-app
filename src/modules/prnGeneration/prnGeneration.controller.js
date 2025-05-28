@@ -46,10 +46,10 @@ const generatePrn = async (req, res) => {
          method: 'post',
          url: 'https://api-test.kra.go.ke/api/generatePrnRequest',
          data:prn, 
-          // headers: {
-          //   'Authorization': `Bearer ${res.authToken}`,
-          //   'Content-Type': 'application/json',
-          // }
+          headers: {
+            'Authorization': `Bearer ${res.authToken}`,
+            'Content-Type': 'application/json',
+          }
 
        })
        .then(function (response) {
