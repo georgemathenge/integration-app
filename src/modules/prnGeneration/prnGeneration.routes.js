@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { generatePrn } = require('./prnGeneration');
+const { generatePrn } = require('./prnGeneration.controller');
 
 router.post('/generate', generatePrn);
 

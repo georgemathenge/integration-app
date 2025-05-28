@@ -5,7 +5,7 @@ const stakeRoutes = require('./modules/stake/stake.routes');
 const outcomeDataRoutes = require('./modules/outcomeData/outcomeData.routes');
 const userRoutes = require('./modules/users/users.routes');
 const authMiddleware = require('./middleware/authentication.js'); 
-const prnRoutes = require('./modules/prn/prn.routes');
+const prnRoutes = require('./modules/prnGeneration/prnGeneration.routes');
 
 
 
