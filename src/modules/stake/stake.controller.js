@@ -47,7 +47,8 @@ const postStakeInfo = async (req, res) => {
     axios({
          method: 'post',
          url: 'https://api-test.kra.go.ke/api/receiveStakeData',
-         stakes, 
+         data:stakes,
+         
           // headers: {
           //   'Authorization': `Bearer ${res.authToken}`,
           //   'Content-Type': 'application/json',
