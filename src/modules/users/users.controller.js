@@ -62,7 +62,7 @@ const authenticate = async (req, res) => {
 
     axios({
       method: 'post',
-      url: 'https://api-test.kra.go.ke/api/authenticate',
+      url: 'https://api-prd.kra.go.ke/api/authenticate',
       data: {
         username:username,
         password:password,
