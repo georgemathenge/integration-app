@@ -38,7 +38,7 @@ const getAllOutcomeData = async (req, res) => {
 
       axios({
              method: 'post',
-             url: 'https://api-test.kra.go.ke/api/receiveOutcomeData',
+             url: 'https://api-prd.kra.go.ke/api/receiveOutcomeData',
                        data:outcomeData, 
               
               // headers: {
